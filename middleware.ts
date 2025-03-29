@@ -7,6 +7,7 @@ export const config = {
   matcher: [
     "/api/:path*",
     "/admin/:path*",
+    "/dashboard/:path*",
     "/((?!_next|favicon.ico|sitemap.xml|robots.txt|.*.jpg|.*.png|.*.svg|.*.gif).*)",
   ],
 };

@@ -1,7 +1,6 @@
 import type React from "react";
 import { Teachers } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
-import { AuthProvider } from "@/contexts/auth-context";
 import { Metadata } from "next";
 import AppWalletProvider from "./components/AppWalletProvider";
 import "./globals.css";
@@ -33,9 +32,9 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <AuthProvider>
-              <SidebarProvider defaultOpen={false}>{children}</SidebarProvider>
-            </AuthProvider>
+            <SidebarProvider defaultOpen={false} className="justify-center">
+              {children}
+            </SidebarProvider>
           </ThemeProvider>
         </AppWalletProvider>
       </body>
