@@ -13,12 +13,15 @@ import {
 import HeroAnimation from "@/components/hero-animation";
 import PartnerLogos from "@/components/partner-logos";
 import FeatureCard from "@/components/feature-card";
-import { useWallet } from "@solana/wallet-adapter-react";
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
+import ConnectBtn from "./components/connect-btn";
+import { useUser } from "@civic/auth-web3/react";
+import { AuthStatus } from "@civic/auth-web3";
 
 export default function Home() {
-  const { connected, connecting, connect } = useWallet();
+  const { authStatus, signIn } = useUser();
+  const connected = authStatus === AuthStatus.AUTHENTICATED;
 
   return (
     <div className="flex min-h-screen flex-col bg-gradient-to-b from-background to-background/80 w-full">
@@ -48,14 +51,7 @@ export default function Home() {
                 </Button>
               </Link>
             ) : (
-              <Button
-                size="lg"
-                className="w-full sm:w-auto"
-                onClick={connect}
-                disabled={connecting}
-              >
-                {connecting ? "Connecting..." : "Connect Wallet"}
-              </Button>
+              <ConnectBtn />
             )}
             <Link href="/features">
               <Button variant="outline" size="lg" className="w-full sm:w-auto">
@@ -147,14 +143,7 @@ export default function Home() {
                   </Button>
                 </Link>
               ) : (
-                <Button
-                  size="lg"
-                  className="w-full sm:w-auto"
-                  onClick={connect}
-                  disabled={connecting}
-                >
-                  {connecting ? "Connecting..." : "Connect Wallet"}
-                </Button>
+                <ConnectBtn />
               )}
               <Link href="#contact">
                 <Button

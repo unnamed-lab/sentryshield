@@ -1,10 +1,9 @@
 import type React from "react";
 import { Teachers } from "next/font/google";
-import { ThemeProvider } from "@/components/theme-provider";
 import { Metadata } from "next";
-import AppWalletProvider from "./components/AppWalletProvider";
+import AppWalletProvider from "./providers/AppWalletProvider";
 import "./globals.css";
-import { SidebarProvider } from "@/components/ui/sidebar";
+import QueryProvider from "./providers/query";
 
 const teacher = Teachers({
   subsets: ["latin"],
@@ -25,18 +24,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${teacher.variable} font-sans`}>
-        <AppWalletProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <SidebarProvider defaultOpen={false} className="justify-center">
-              {children}
-            </SidebarProvider>
-          </ThemeProvider>
-        </AppWalletProvider>
+        <QueryProvider>
+          <AppWalletProvider>{children}</AppWalletProvider>
+        </QueryProvider>
       </body>
     </html>
   );

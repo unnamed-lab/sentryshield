@@ -17,7 +17,7 @@ import { useNotifications } from "@/hooks/use-notifications";
 import { useSidebar } from "../ui/sidebar";
 import { useUser } from "@civic/auth-web3/react";
 
-export function Header() {
+export function Header({ className }: { className?: string }) {
   const { toggleSidebar, isMobile } = useSidebar();
   const { user, signOut } = useUser();
   const { notifications, markAsRead, markAllAsRead, clearAllNotifications } =
@@ -28,7 +28,8 @@ export function Header() {
   return (
     <header
       className={cn(
-        "sticky top-0 left-0 z-30 flex h-16 w-full items-center gap-4 border-b bg-background px-4 md:px-6 transition-all duration-300"
+        "sticky top-0 left-0 z-30 flex h-16 w-full items-center gap-4 border-b bg-background px-4 md:px-6 transition-all duration-300",
+        className
       )}
     >
       {isMobile ? (

@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { Header } from "@/components/dashboard/header";
 import { AppSidebar } from "@/components/dashboard/sidebar";
 import { useUser } from "@civic/auth-web3/react";
+import { SidebarProvider } from "@/components/ui/sidebar";
 
 export default function DashboardLayout({
   children,
@@ -23,14 +24,12 @@ export default function DashboardLayout({
   }, [user, router]);
 
   return (
-    <div className="bg-background">
-        <Header />
-      <div className="relative flex flex-col flex-1">
-        <main className="flex-1 p-4 md:p-6">
-          <div className="container mx-auto max-w-7xl">{children}</div>
-        </main>
-      </div>
+    <SidebarProvider defaultOpen={false} className="relative">
       <AppSidebar />
-    </div>
+      <main className="flex-1">
+        <Header />
+        <div className="p-4">{children}</div>
+      </main>
+    </SidebarProvider>
   );
 }

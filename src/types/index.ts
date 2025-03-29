@@ -260,6 +260,7 @@ export interface VerifiedTokenLinks {
   value: string
 }
 
+// Verified Token
 export interface VerifiedToken {
   description: string
   jup_strict: boolean

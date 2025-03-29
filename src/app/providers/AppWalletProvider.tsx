@@ -7,8 +7,14 @@ import {
   useWallet,
   useConnection,
 } from "@solana/wallet-adapter-react";
+import {
+  PhantomWalletAdapter,
+  SolflareWalletAdapter,
+} from "@solana/wallet-adapter-wallets";
+import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
-import { CivicAuthProvider } from "@civic/auth/nextjs";
+import { CivicAuthProvider } from "@civic/auth-web3/nextjs";
+import { clusterApiUrl } from "@solana/web3.js";
 
 // Wrap the content with the necessary providers to give access to hooks: solana wallet adapter & civic auth provider
 export default function AppWalletProvider({
@@ -16,14 +22,22 @@ export default function AppWalletProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const endpoint =
-    process.env.NODE_ENV === "development"
-      ? "https://api.devnet.solana.com"
-      : "https://api.mainnet-beta.solana.com";
+  // const endpoint =
+  //   process.env.NODE_ENV === "development"
+  //     ? "https://api.devnet.solana.com"
+  //     : "https://api.mainnet-beta.solana.com";
+
+  const network = WalletAdapterNetwork.Mainnet; // or Devnet, Testnet
+  const endpoint = React.useMemo(() => clusterApiUrl(network), [network]);
+
+  const wallets = React.useMemo(
+    () => [new PhantomWalletAdapter(), new SolflareWalletAdapter()],
+    [network]
+  );
 
   return (
     <ConnectionProvider endpoint={endpoint}>
-      <WalletProvider wallets={[]} autoConnect>
+      <WalletProvider wallets={wallets} autoConnect>
         <WalletModalProvider>
           <CivicAuthProvider>{children}</CivicAuthProvider>
         </WalletModalProvider>

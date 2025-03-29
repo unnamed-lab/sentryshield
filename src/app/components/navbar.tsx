@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { useUser } from "@civic/auth-web3/react";
-import { userHasWallet } from "@civic/auth-web3";
+import ConnectBtn from "./connect-btn";
 
 const navbarItems = [
   { title: "Features", href: "/features" },
@@ -14,18 +14,8 @@ const navbarItems = [
 ];
 
 export default function Navbar() {
-  const userContext = useUser();
-  const { authStatus, signIn } = useUser();
+  const { authStatus } = useUser();
   const connected = authStatus === AuthStatus.AUTHENTICATED;
-
-  const handleConnect = React.useCallback(async () => {
-    const afterLogin = async () => {
-      if (userContext.user && !userHasWallet(userContext)) {
-        await userContext.createWallet();
-      }
-    };
-    await signIn().then(afterLogin);
-  }, [signIn, userContext]);
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-b-primary bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 flex justify-center">
@@ -53,14 +43,7 @@ export default function Navbar() {
               <Button size="sm">Dashboard</Button>
             </Link>
           ) : (
-            <Button
-              variant={"default"}
-              size="sm"
-              onClick={handleConnect}
-              // disabled={authStatus === AuthStatus.AUTHENTICATING ? false : true}
-            >
-              {connected ? "Connecting..." : "Connect"}
-            </Button>
+            <ConnectBtn />
           )}
         </div>
       </div>
