@@ -1,4 +1,9 @@
-import type { TokenCheck, TrendingToken, VerifiedTokenSimple } from "@/types";
+import type {
+  Token,
+  TokenCheck,
+  TrendingToken,
+  VerifiedTokenSimple,
+} from "@/types";
 
 // Mock data for development purposes
 const mockNewTokens: TokenCheck[] = [
@@ -172,7 +177,7 @@ const mockNewTokens: TokenCheck[] = [
   },
 ];
 
-const mockTrendingTokens: TrendingToken[] = [
+export const mockTrendingTokens: TrendingToken[] = [
   {
     mint: "0x2345678901abcdef2345678901abcdef23456789",
     up_count: 1250,
@@ -310,7 +315,7 @@ const mockTrendingTokenDetails: TokenCheck[] = [
   },
 ];
 
-const mockVerifiedTokens: VerifiedTokenSimple[] = [
+export const mockVerifiedTokens: VerifiedTokenSimple[] = [
   {
     mint: "0x6789012345abcdef6789012345abcdef67890123",
     name: "Verified Token 1",
@@ -629,18 +634,26 @@ const mockRecentTokens: TokenCheck[] = [
 ];
 
 // Service functions
-export const getNewTokens = async (): Promise<TokenCheck[]> => {
-  // In a real app, this would fetch from an API
-  return new Promise((resolve) => {
-    setTimeout(() => resolve(mockNewTokens), 500);
+export const getNewTokens = async (): Promise<Token[]> => {
+  const response = await fetch("https://api.rugcheck.xyz/v1/stats/new_tokens", {
+    next: { revalidate: 60000 },
   });
+
+  if (!response.ok) return [];
+
+  const data: Token[] = await response.json();
+  return data;
 };
 
 export const getTrendingTokens = async (): Promise<TrendingToken[]> => {
-  // In a real app, this would fetch from an API
-  return new Promise((resolve) => {
-    setTimeout(() => resolve(mockTrendingTokens), 500);
+  const response = await fetch("https://api.rugcheck.xyz/v1/stats/recent", {
+    next: { revalidate: 60000 },
   });
+
+  if (!response.ok) return [];
+
+  const data: TrendingToken[] = await response.json();
+  return data;
 };
 
 export const getTrendingTokenDetails = async (): Promise<TokenCheck[]> => {
@@ -651,10 +664,14 @@ export const getTrendingTokenDetails = async (): Promise<TokenCheck[]> => {
 };
 
 export const getVerifiedTokens = async (): Promise<VerifiedTokenSimple[]> => {
-  // In a real app, this would fetch from an API
-  return new Promise((resolve) => {
-    setTimeout(() => resolve(mockVerifiedTokens), 500);
+  const response = await fetch("https://api.rugcheck.xyz/v1/stats/verified", {
+    next: { revalidate: 60000 },
   });
+
+  if (!response.ok) return [];
+
+  const data: VerifiedTokenSimple[] = await response.json();
+  return data;
 };
 
 export const getVerifiedTokenDetails = async (): Promise<TokenCheck[]> => {

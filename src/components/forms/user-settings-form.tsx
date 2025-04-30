@@ -88,7 +88,7 @@ export function UserSettingsForm({ onSubmit, defaultValues }: UserSettingsFormPr
                   <FormControl>
                     <Input placeholder="your.email@example.com" {...field} />
                   </FormControl>
-                  <FormDescription>We'll use this email for notifications and account recovery</FormDescription>
+                  <FormDescription>{"We'll use this email for notifications and account recovery"}</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}

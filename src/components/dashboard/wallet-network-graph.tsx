@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
 import { useEffect, useRef } from "react"
@@ -224,4 +225,3 @@ export function WalletNetworkGraph() {
 
   return <canvas ref={canvasRef} className="w-full h-full" />
 }
-

@@ -1,27 +1,28 @@
-"use client";
 
 import type React from "react";
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { Header } from "@/components/dashboard/header";
 import { AppSidebar } from "@/components/dashboard/sidebar";
-import { useUser } from "@civic/auth-web3/react";
 import { SidebarProvider } from "@/components/ui/sidebar";
 
-export default function DashboardLayout({
+import { getUser } from "@civic/auth-web3/nextjs";
+import { UserButton } from "@civic/auth-web3/react";
+
+export default async function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const { user } = useUser();
-  const router = useRouter();
-
-  // Redirect to the dashboard home if authenticated
-  useEffect(() => {
-    if (user && window.location.pathname === "/dashboard/login") {
-      router.push("/dashboard");
-    }
-  }, [user, router]);
+  const user = await getUser();
+  if (!user) {
+    return (
+      <div className="flex flex-col gap-4 h-screen w-screen items-center justify-center">
+        <p className="text-lg font-semibold">
+          Please log in to access this page.
+        </p>
+        <UserButton className="font-bold rounded py-2 hover:text-black" />
+      </div>
+    );
+  }
 
   return (
     <SidebarProvider defaultOpen={false} className="relative">

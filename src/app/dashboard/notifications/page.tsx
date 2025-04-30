@@ -31,7 +31,7 @@ export default function NotificationsPage() {
               <Bell className="h-12 w-12 text-muted-foreground mb-4" />
               <h3 className="text-lg font-medium mb-1">No notifications</h3>
               <p className="text-muted-foreground max-w-sm">
-                You don't have any notifications yet. Check back later for updates.
+                {"You don't have any notifications yet. Check back later for updates."}
               </p>
             </div>
           ) : (

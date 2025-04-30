@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts"
@@ -59,4 +60,3 @@ export function WalletExposureChart() {
     </div>
   )
 }
-

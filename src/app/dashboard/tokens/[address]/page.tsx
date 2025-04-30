@@ -149,8 +149,8 @@ export default function TokenDetail() {
         <AlertTriangle className="h-12 w-12 text-muted-foreground mb-4" />
         <h3 className="text-lg font-medium mb-1">Token Not Found</h3>
         <p className="text-muted-foreground max-w-sm">
-          We couldn't find a token with the address {address}. Please check the
-          address and try again.
+          {`We couldn't find a token with the address ${address}. Please check the
+          address and try again.`}
         </p>
         <Button className="mt-6">
           <Search className="mr-2 h-4 w-4" />

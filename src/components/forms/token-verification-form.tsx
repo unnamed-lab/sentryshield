@@ -118,7 +118,7 @@ export function TokenVerificationForm({ onSubmit, defaultValues }: TokenVerifica
                   <FormControl>
                     <Textarea placeholder="Describe your token and its purpose" className="min-h-[120px]" {...field} />
                   </FormControl>
-                  <FormDescription>Provide a clear description of your token's purpose and utility</FormDescription>
+                  <FormDescription>{"Provide a clear description of your token's purpose and utility"}</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}

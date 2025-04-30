@@ -1,12 +1,12 @@
-import type { TokenCheck, TrendingToken, VerifiedTokenSimple } from "@/types";
-import { TokenCard } from "./token-card";
+import type { TokenCheck, TrendingToken, VerifiedTokenSimple } from "@/types"
+import { TokenCard } from "./token-card"
 
 interface TokenListProps {
-  tokens: (TokenCheck | VerifiedTokenSimple | TrendingToken)[];
-  variant?: "default" | "compact";
-  showActions?: boolean;
-  columns?: number;
-  isLoading?: boolean;
+  tokens: (TokenCheck | VerifiedTokenSimple | TrendingToken)[]
+  variant?: "default" | "compact"
+  showActions?: boolean
+  columns?: number
+  isLoading?: boolean
 }
 
 export function TokenList({
@@ -18,44 +18,30 @@ export function TokenList({
 }: TokenListProps) {
   if (isLoading) {
     return (
-      <div
-        className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-${columns} gap-4`}
-      >
+      <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-${columns} gap-4`}>
         {Array(columns)
           .fill(0)
           .map((_, i) => (
-            <div
-              key={i}
-              className="h-[250px] rounded-lg bg-muted animate-pulse"
-            />
+            <div key={i} className="h-[250px] rounded-lg bg-muted animate-pulse" />
           ))}
       </div>
-    );
+    )
   }
 
   if (!tokens || tokens.length === 0) {
-    return (
-      <div className="text-center py-8 text-muted-foreground">
-        No tokens found
-      </div>
-    );
+    return <div className="text-center py-8 text-muted-foreground">No tokens found</div>
   }
 
   return (
-    <div
-      className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-${columns} gap-4`}
-    >
+    <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-${columns} gap-4`}>
       {tokens.map((token) => {
         // Handle TrendingToken type by providing a placeholder
-        if (token as TrendingToken) {
+        if (!("mint" in token) && "up_count" in token) {
           return (
-            <div
-              key={token.mint}
-              className="h-[250px] rounded-lg bg-muted flex items-center justify-center"
-            >
+            <div key={token.mint} className="h-[250px] rounded-lg bg-muted flex items-center justify-center">
               Trending Token: {token.mint}
             </div>
-          );
+          )
         }
 
         return (
@@ -65,8 +51,8 @@ export function TokenList({
             variant={variant}
             showActions={showActions}
           />
-        );
+        )
       })}
     </div>
-  );
+  )
 }

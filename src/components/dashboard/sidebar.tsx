@@ -24,7 +24,7 @@ import Image from "next/image";
 import Link from "next/link";
 export function AppSidebar() {
   const pathname = usePathname();
-  const { isMobile, openMobile, state, toggleSidebar } = useSidebar();
+  const { state } = useSidebar();
 
   const routes = [
     {

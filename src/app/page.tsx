@@ -20,7 +20,7 @@ import { useUser } from "@civic/auth-web3/react";
 import { AuthStatus } from "@civic/auth-web3";
 
 export default function Home() {
-  const { authStatus, signIn } = useUser();
+  const { authStatus } = useUser();
   const connected = authStatus === AuthStatus.AUTHENTICATED;
 
   return (
