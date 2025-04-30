@@ -1,10 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 "use client"
 
 import { useState } from "react"
 import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
 
 export function WalletActivityChart() {
-  const [data, setData] = useState([
+  const [data] = useState([
     { day: "1", transactions: 5 },
     { day: "2", transactions: 3 },
     { day: "3", transactions: 7 },

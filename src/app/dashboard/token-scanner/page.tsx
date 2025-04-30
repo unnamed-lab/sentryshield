@@ -1,20 +1,34 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { ArrowRight, ChevronRight, Copy, ExternalLink, Info, Shield, AlertTriangle } from "lucide-react"
-import Link from "next/link"
-import { RecentScans } from "@/components/dashboard/recent-scans"
-import { Separator } from "@/components/ui/separator"
-import { cn } from "@/lib/utils"
-import { TokenSearchForm } from "@/components/forms/token-search-form"
-import type { TokenSearchFormValues } from "@/lib/validations/form-schemas"
-import { Button } from "@/components/ui/button"
+import { useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  ArrowRight,
+  ChevronRight,
+  Copy,
+  ExternalLink,
+  Info,
+  Shield,
+  AlertTriangle,
+} from "lucide-react";
+import Link from "next/link";
+import { RecentScans } from "@/components/dashboard/recent-scans";
+import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
+import { TokenSearchForm } from "@/components/forms/token-search-form";
+import type { TokenSearchFormValues } from "@/lib/validations/form-schemas";
+import { Button } from "@/components/ui/button";
 
 export default function TokenScanner() {
-  const [hasSearched, setHasSearched] = useState(false)
+  const [hasSearched, setHasSearched] = useState(false);
 
   const mockTokens = [
     {
@@ -57,29 +71,36 @@ export default function TokenScanner() {
       riskScore: 90,
       riskColor: "text-green-500",
     },
-  ]
+  ];
 
   const handleSearch = async (data: TokenSearchFormValues) => {
-    console.log("Searching for:", data.query)
+    console.log("Searching for:", data.query);
 
     // Simulate API call delay
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+    await new Promise((resolve) => setTimeout(resolve, 1500));
 
     // Set search results
-    setHasSearched(true)
-  }
+    setHasSearched(true);
+  };
 
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl md:text-3xl font-bold tracking-tight">Token Scanner</h1>
-        <p className="text-muted-foreground">Scan tokens for potential security risks and analyze their behavior.</p>
+        <h1 className="text-2xl md:text-3xl font-bold tracking-tight">
+          Token Scanner
+        </h1>
+        <p className="text-muted-foreground">
+          Scan tokens for potential security risks and analyze their behavior.
+        </p>
       </div>
 
       <Card>
         <CardHeader>
           <CardTitle>Scan Token</CardTitle>
-          <CardDescription>Enter a token contract address to analyze its security and risk profile</CardDescription>
+          <CardDescription>
+            Enter a token contract address to analyze its security and risk
+            profile
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <TokenSearchForm onSubmit={handleSearch} />
@@ -101,7 +122,8 @@ export default function TokenScanner() {
                         <Badge variant="outline">{token.symbol}</Badge>
                       </div>
                       <p className="text-sm text-muted-foreground flex items-center gap-1">
-                        {token.address.substring(0, 6)}...{token.address.substring(token.address.length - 4)}
+                        {token.address.substring(0, 6)}...
+                        {token.address.substring(token.address.length - 4)}
                         <button className="hover:text-primary">
                           <Copy className="h-3 w-3" />
                         </button>
@@ -113,10 +135,16 @@ export default function TokenScanner() {
                     <div className="flex items-center gap-6">
                       <div className="text-right">
                         <div className="flex items-center gap-2">
-                          <span className="text-sm font-medium">Risk Score:</span>
-                          <span className={cn("font-bold", token.riskColor)}>{token.riskScore}</span>
+                          <span className="text-sm font-medium">
+                            Risk Score:
+                          </span>
+                          <span className={cn("font-bold", token.riskColor)}>
+                            {token.riskScore}
+                          </span>
                         </div>
-                        <span className="text-sm text-muted-foreground">{token.risk} Risk</span>
+                        <span className="text-sm text-muted-foreground">
+                          {token.risk} Risk
+                        </span>
                       </div>
                       <Link href={`/dashboard/tokens/${token.address}`}>
                         <Button variant="ghost" size="sm" className="gap-1">
@@ -137,37 +165,48 @@ export default function TokenScanner() {
                 <div className="flex items-start gap-3">
                   <Info className="h-5 w-5 text-blue-500 mt-0.5" />
                   <div>
-                    <h3 className="font-medium mb-1">How to use the Token Scanner</h3>
+                    <h3 className="font-medium mb-1">
+                      How to use the Token Scanner
+                    </h3>
                     <p className="text-sm text-muted-foreground">
-                      Enter a token contract address to analyze its security posture, including liquidity distribution,
-                      holder concentration, and potential malicious behavior. We'll provide a comprehensive risk
-                      assessment using data from RugCheck and DD.xyz.
+                      {
+                        "Enter a token contract address to analyze its security posture, including liquidity distribution, holder concentration, and potential malicious behavior. We'll provide a comprehensive risk assessment using data from RugCheck and DD.xyz."
+                      }
                     </p>
                   </div>
                 </div>
               </div>
 
               <div>
-                <h3 className="text-lg font-medium mb-3">Recently Scanned Tokens</h3>
+                <h3 className="text-lg font-medium mb-3">
+                  Recently Scanned Tokens
+                </h3>
                 <RecentScans />
               </div>
 
               <div className="grid md:grid-cols-2 gap-4">
                 <Card>
                   <CardHeader className="pb-2">
-                    <CardTitle className="text-base">High Risk Token Detection</CardTitle>
+                    <CardTitle className="text-base">
+                      High Risk Token Detection
+                    </CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="flex items-start gap-3">
                       <AlertTriangle className="h-8 w-8 text-red-500 mt-1" />
                       <div>
                         <p className="text-sm text-muted-foreground">
-                          Our scanner automatically identifies and flags suspicious token behaviors including:
+                          Our scanner automatically identifies and flags
+                          suspicious token behaviors including:
                         </p>
                         <ul className="text-sm text-muted-foreground mt-2 space-y-1 list-disc pl-4">
                           <li>Honeypot contracts that prevent selling</li>
-                          <li>Extreme transaction taxes or owner-only functions</li>
-                          <li>Circular trading patterns between related wallets</li>
+                          <li>
+                            Extreme transaction taxes or owner-only functions
+                          </li>
+                          <li>
+                            Circular trading patterns between related wallets
+                          </li>
                           <li>Hidden minting capabilities</li>
                         </ul>
                       </div>
@@ -176,18 +215,23 @@ export default function TokenScanner() {
                 </Card>
                 <Card>
                   <CardHeader className="pb-2">
-                    <CardTitle className="text-base">Community Security Layer</CardTitle>
+                    <CardTitle className="text-base">
+                      Community Security Layer
+                    </CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="flex items-start gap-3">
                       <Shield className="h-8 w-8 text-primary mt-1" />
                       <div>
                         <p className="text-sm text-muted-foreground">
-                          SentryShield combines automated analysis with community reporting to provide multiple security
+                          SentryShield combines automated analysis with
+                          community reporting to provide multiple security
                           layers:
                         </p>
                         <ul className="text-sm text-muted-foreground mt-2 space-y-1 list-disc pl-4">
-                          <li>Crowdsourced risk reports from security researchers</li>
+                          <li>
+                            Crowdsourced risk reports from security researchers
+                          </li>
                           <li>Aggregated on-chain threat intelligence</li>
                           <li>Continuous monitoring of token behavior</li>
                           <li>Historical risk pattern recognition</li>
@@ -224,8 +268,8 @@ export default function TokenScanner() {
                         token.risk === "Low"
                           ? "bg-green-500"
                           : token.risk === "Medium"
-                            ? "bg-yellow-500"
-                            : "bg-red-500",
+                          ? "bg-yellow-500"
+                          : "bg-red-500"
                       )}
                     >
                       {token.risk}
@@ -235,10 +279,15 @@ export default function TokenScanner() {
                 <CardContent className="pb-2">
                   <div className="flex justify-between items-center">
                     <div className="text-sm text-muted-foreground">
-                      {token.address.substring(0, 8)}...{token.address.substring(token.address.length - 6)}
+                      {token.address.substring(0, 8)}...
+                      {token.address.substring(token.address.length - 6)}
                     </div>
                     <Link href={`/dashboard/tokens/${token.address}`}>
-                      <Button variant="ghost" size="sm" className="h-7 gap-1 text-xs">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="h-7 gap-1 text-xs"
+                      >
                         View Details
                         <ArrowRight className="h-3 w-3" />
                       </Button>
@@ -251,14 +300,17 @@ export default function TokenScanner() {
         </TabsContent>
 
         <TabsContent value="reported">
-          <div className="flex items-center justify-center p-8 text-muted-foreground">No recently reported tokens</div>
+          <div className="flex items-center justify-center p-8 text-muted-foreground">
+            No recently reported tokens
+          </div>
         </TabsContent>
 
         <TabsContent value="trending">
-          <div className="flex items-center justify-center p-8 text-muted-foreground">No trending tokens</div>
+          <div className="flex items-center justify-center p-8 text-muted-foreground">
+            No trending tokens
+          </div>
         </TabsContent>
       </Tabs>
     </div>
-  )
+  );
 }
-

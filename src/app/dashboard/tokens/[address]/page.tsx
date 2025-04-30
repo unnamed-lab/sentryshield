@@ -235,7 +235,7 @@ export default function TokenDetail() {
               <Shield className="h-4 w-4" />
               <AlertTitle>Security Assessment</AlertTitle>
               <AlertDescription>
-                This token has passed all security checks. The contract doesn't contain any known vulnerabilities.
+                {"This token has passed all security checks. The contract doesn't contain any known vulnerabilities."}
               </AlertDescription>
             </Alert>
 
@@ -331,7 +331,7 @@ export default function TokenDetail() {
                   </div>
                   <div className="text-sm font-medium">{tag.percentage}%</div>
                 </div>
-                <Progress
+                {/* <Progress
                   value={tag.percentage}
                   className={cn(
                     "h-1.5",
@@ -348,7 +348,7 @@ export default function TokenDetail() {
                           : "bg-red-500"
                         : "bg-blue-500",
                   )}
-                />
+                /> */}
                 <div className="text-xs text-muted-foreground text-right">{tag.votes} votes</div>
               </div>
             ))}

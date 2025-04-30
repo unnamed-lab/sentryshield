@@ -5,6 +5,8 @@ const nextConfig: NextConfig = {};
 
 const withCivicAuth = createCivicAuthPlugin({
   clientId: process.env.CIVIC_CLIENT_ID!,
+  loginUrl: "/auth/login",
+  include: ["/dashboard/*", "/admin/*"],
 });
 
 export default withCivicAuth(nextConfig);

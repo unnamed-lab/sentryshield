@@ -11,7 +11,7 @@ import {
   Zap,
 } from "lucide-react";
 import HeroAnimation from "@/components/hero-animation";
-import PartnerLogos from "@/components/partner-logos";
+// import PartnerLogos from "@/components/partner-logos";
 import FeatureCard from "@/components/feature-card";
 import { useWallet } from "@solana/wallet-adapter-react";
 import Navbar from "./components/navbar";
@@ -70,7 +70,7 @@ export default function Home() {
       </section>
 
       {/* Partners Section */}
-      <section id="partners" className="container py-16 space-y-8">
+      {/* <section id="partners" className="container py-16 space-y-8">
         <div className="text-center space-y-4">
           <h2 className="text-3xl font-bold">Powered By Industry Leaders</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -79,7 +79,7 @@ export default function Home() {
           </p>
         </div>
         <PartnerLogos />
-      </section>
+      </section> */}
 
       {/* Features Section */}
       <section id="features" className="container py-16 space-y-12">
